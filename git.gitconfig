@@ -1,0 +1,25 @@
+; vim: set filetype=gitconfig:
+; ln -s ~/srcutils/git.gitconfig $HOME/.gitconfig
+
+[user]
+	name = Du Xing
+	email = duxing2007@gmail.com
+[color]
+	ui = true
+[core]
+	excludesfile = ~/srcutils/git.ignore_global
+
+[alias]
+	a = add
+	b = branch -v
+	co = checkout
+	d = diff
+	dlog = log --graph --simplify-by-decoration --oneline --pretty=format:'%Cred%h%Creset %Cyellow%d%Creset %Cgreen%cr%Creset'
+	l = log
+	p = pull
+	s = status
+
+[diff]
+	tool = meld
+[difftool]
+	prompt = false

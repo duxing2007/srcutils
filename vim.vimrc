@@ -1,5 +1,5 @@
-" Remeber to add below line to $HOME/.vimrc
-" source vim.vimrc
+" Remeber to add below line in ~/.vimrc
+" source ~/srcutils/vim.vimrc
 
 set number
 set hlsearch

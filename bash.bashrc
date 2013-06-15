@@ -1,8 +1,8 @@
 #!/bin/bash
 #
 #
-#Remeber to add below line in $HOME/.bashrc
-#   source bash.bashrc
+#Remeber to add below line in ~/.bashrc
+#   source ~/srcutils/bash.bashrc
 
 export EDITOR=vi
 
