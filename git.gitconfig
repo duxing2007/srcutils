@@ -1,5 +1,5 @@
 ; vim: set filetype=gitconfig:
-; ln -s ~/srcutils/git.gitconfig $HOME/.gitconfig
+; ln -s ~/srcutils/git.gitconfig ~/.gitconfig
 
 [user]
 	name = Du Xing
@@ -12,6 +12,7 @@
 [alias]
 	a = add
 	b = branch -v
+	c = commit
 	co = checkout
 	d = diff
 	dlog = log --graph --simplify-by-decoration --oneline --pretty=format:'%Cred%h%Creset %Cyellow%d%Creset %Cgreen%cr%Creset'
