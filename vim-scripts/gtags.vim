@@ -295,7 +295,7 @@ function! s:TrimOption(option)
 
     while i < length
         let c = a:option[i]
-        if c !~ '[cenpquv]'
+        if c !~# '[cenpquv]'
             let option = option . c
         endif
         let i = i + 1
