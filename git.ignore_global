@@ -3,3 +3,5 @@ GRTAGS
 GSYMS
 GTAGS
 files.gtags.txt
+*.expand
+*.o

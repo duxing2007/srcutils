@@ -1,0 +1,5 @@
+#!/bin/bash
+
+PROXY=127.0.0.1
+PROXYPORT=9009
+exec socat STDIO PROXY:$PROXY:$1:$2,proxyport=$PROXYPORT

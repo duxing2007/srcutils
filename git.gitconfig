@@ -8,6 +8,7 @@
 	ui = true
 [core]
 	excludesfile = ~/srcutils/git.ignore_global
+	gitproxy = gitproxy
 
 [alias]
 	a = add

@@ -5,6 +5,7 @@
 #   source ~/srcutils/bash.bashrc
 
 export EDITOR=vi
+export PATH=~/srcutils/bin/:$PATH
 
 #history config
 HISTCONTROL=erasedups:ignorespace
@@ -14,14 +15,14 @@ HISTFILESIZE=9000
 #ls alias
 alias ll='ls -clth'
 alias ls='ls --group-directories-first --color=auto'
-alias cls='ack-grep -f --cc'
-alias cppls='ack-grep -f --cpp'
+alias cls='ack-grep -f --asm --cc --cpp'
 alias jls='ack-grep -f --java'
 
 #grep alias
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias man='LC_MESSAGES=en_US.UTF-8 man'
 
 function fname()
 {
@@ -30,7 +31,7 @@ function fname()
 
 function mkgrep()
 {
-    find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.mk' -o -name Makefile \) -print0 | xargs -0 grep --color -n "$@"
+    find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.mk' -o -name Makefile -o -name Makefile.am \) -print0 | xargs -0 grep --color -n "$@"
 }
 
 function kgrep()
@@ -50,7 +51,7 @@ function sgrep()
 
 function cgrep()
 {
-    find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.h' -o -name '*.inl' \) -print0 | xargs -0 grep --color -n "$@"
+    find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.h' -o -name '*.inl' -o -iname "*\.S" \) -print0 | xargs -0 grep --color -n "$@"
 }
 
 function resgrep()
