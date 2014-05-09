@@ -1,6 +1,40 @@
 " Remeber to add below line in ~/.vimrc
 " source ~/srcutils/vim.vimrc
 
+" Vundle.vim begin..
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'Valloric/YouCompleteMe'
+
+Plugin 'klen/python-mode'
+
+Plugin 'mru.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin on
+"
+" Brief help
+" :PluginList          - list configured plugins
+" :PluginInstall(!)    - install (update) plugins
+" :PluginSearch(!) foo - search (or refresh cache first) for foo
+" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" Vundle.vim end...
 set number
 set hlsearch
 set ignorecase
@@ -17,7 +51,6 @@ set modeline
 set fileencodings=ucs-bom,utf-8,default,cp936,latin1
 set autoindent
 
-filetype plugin on
 
 " gnu global map
 map <C-N> :GtagsCursor<CR>
@@ -33,8 +66,10 @@ autocmd Filetype man noremap <buffer> s 	<ESC>/^\s\+-
 
 " python begin
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
-autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+" CPP begin
+nnoremap <leader>jd :YcmCompleter GoTo<CR>' maps the '<leader>jd'
+let g:ycm_global_ycm_extra_conf = '~/srcutils/vim-scripts/.ycm_extra_conf.py'
 
 " RunFind()
 

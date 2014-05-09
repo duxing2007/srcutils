@@ -5,3 +5,4 @@ GTAGS
 files.gtags.txt
 *.expand
 *.o
+*.pyc
