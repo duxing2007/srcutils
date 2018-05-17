@@ -6,6 +6,7 @@
 
 export EDITOR=vi
 export PATH=~/srcutils/bin/:$PATH
+export GTAGSFORCECPP=""
 
 #history config
 HISTCONTROL=erasedups:ignorespace
@@ -14,15 +15,17 @@ HISTFILESIZE=9000
 
 #ls alias
 alias ll='ls -clth'
-alias ls='ls --group-directories-first --color=auto'
+alias ls='ls --group-directories-first --color=never'
 alias cls='ack-grep -f --asm --cc --cpp'
 alias jls='ack-grep -f --java'
 
 #grep alias
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias grep='grep --color=never'
+alias fgrep='fgrep --color=never'
+alias egrep='egrep --color=never'
 alias man='LC_MESSAGES=en_US.UTF-8 man'
+
+alias svnst='svn status|grep  "\." | grep -v ".obj"'
 
 function fname()
 {
@@ -59,23 +62,54 @@ function resgrep()
     for dir in `find . -name .repo -prune -o -name .git -prune -o -name res -type d`; do find $dir -type f -name '*\.xml' -print0 | xargs -0 grep --color -n "$@"; done;
 }
 
-function godir () {
+MY_CD_FILELIST="/data/godir_filelist"
+
+function mycd()
+{
+	local lastarg=${!#}
+
+	if [[ ! -d $lastarg ]]
+	then
+		return
+	fi
+
+
+	if [[ ! -f $MY_CD_FILELIST ]]
+	then
+		touch $MY_CD_FILELIST
+	fi
+
+	local mydir=$(readlink -f $lastarg)
+	cd $*	
+	if grep -q -x -F "$mydir" $MY_CD_FILELIST
+	then
+		return
+	fi
+
+	
+	local maxnum=200
+	local halfnum=$(($maxnum/2))
+	local filenum=$(wc -l $MY_CD_FILELIST | cut -d' ' -f1)
+
+	if [[ $filenum -ge $maxnum ]]
+	then
+		tail -$halfnum $MY_CD_FILELIST > /tmp/tmp_filelist
+		mv /tmp/tmp_filelist $MY_CD_FILELIST
+	fi
+
+	echo $mydir >> $MY_CD_FILELIST
+}
+
+alias cd='mycd'
+
+function godir () 
+{
     if [[ -z "$1" ]]; then
         echo "Usage: godir <regex>"
         return
     fi
-    T=/tmp/`pwd`
-    if [[ ! -d $T ]]; then
-         mkdir -p $T 
-    fi
-    if [[ ! -f $T/filelist ]]; then
-        echo -n "Creating index..."
-        (find . -wholename ./out -prune -o -wholename ./.repo -prune -o -type f > $T/filelist)
-        echo " Done"
-        echo ""
-    fi
     local lines
-    lines=($(grep "$1" $T/filelist | sed -e 's/\/[^/]*$//' | sort | uniq))
+    lines=($(grep "$1" $MY_CD_FILELIST |  sort | uniq))
     if [[ ${#lines[@]} = 0 ]]; then
         echo "Not found"
         return
@@ -103,5 +137,7 @@ function godir () {
     else
         pathname=${lines[0]}
     fi
-    cd ./$pathname
+    cd $pathname
 }
+
+

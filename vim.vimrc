@@ -3,6 +3,7 @@
 
 " Vundle.vim begin..
 
+syntax off
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -15,11 +16,10 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'Valloric/YouCompleteMe'
-
-Plugin 'klen/python-mode'
 
 Plugin 'mru.vim'
+Plugin 'klen/python-mode'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -40,16 +40,19 @@ set hlsearch
 set ignorecase
 set nowrapscan
 set listchars=trail:-,tab:>-
-set list
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set nolist
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set smarttab
 set autoindent
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 set modeline
-set fileencodings=ucs-bom,utf-8,default,cp936,latin1
+set fileencodings=ucs-bom,utf-8,cp936,gb2312,latin1
 set autoindent
+
+set background=dark
+colorscheme desert
 
 
 " gnu global map
@@ -63,13 +66,11 @@ let MRU_Max_Menu_Entries = 100
 runtime! ftplugin/man.vim
 " Search options quickly
 autocmd Filetype man noremap <buffer> s 	<ESC>/^\s\+-
+autocmd FileType c,cpp setlocal equalprg=clang-format-3.3
+
 
 " python begin
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-
-" CPP begin
-nnoremap <leader>jd :YcmCompleter GoTo<CR>' maps the '<leader>jd'
-let g:ycm_global_ycm_extra_conf = '~/srcutils/vim-scripts/.ycm_extra_conf.py'
 
 " RunFind()
 
@@ -86,7 +87,7 @@ endfunction
 command! -nargs=1 Find call s:RunFind(<f-args>)
 
 " Cgrep
-command! -nargs=1 Cgrep :vimgrep "<args>\c" **/*.c **/*.h **/*.cpp | copen
+command! -nargs=1 Cgrep :vimgrep "<args>\c" **/*.c **/*.h **/*.cpp **/*.hh **/*.cc **/*.hpp   | copen
 
 " Jgrep
 command! -nargs=1 Jgrep :vimgrep "<args>\C" **/*.java  | copen
@@ -94,3 +95,5 @@ command! -nargs=1 Jgrep :vimgrep "<args>\C" **/*.java  | copen
 " M4grep
 command! -nargs=1 M4grep :vimgrep "<args>\C" **/*.m4 **/*.am configure.ac  | copen
 
+" Pgrep
+command! -nargs=1 Pgrep :vimgrep "<args>\c" **/*.php  | copen
