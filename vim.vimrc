@@ -66,7 +66,7 @@ let MRU_Max_Menu_Entries = 100
 runtime! ftplugin/man.vim
 " Search options quickly
 autocmd Filetype man noremap <buffer> s 	<ESC>/^\s\+-
-autocmd FileType c,cpp setlocal equalprg=clang-format-3.3
+autocmd FileType c,cpp setlocal equalprg=clang-format
 
 
 " python begin
