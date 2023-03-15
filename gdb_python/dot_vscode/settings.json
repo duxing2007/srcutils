@@ -1,0 +1,11 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/opt/rh/devtoolset-7/root/usr/share/gdb/python/gdb/",
+    ],
+    "python.analysis.extraPaths": [
+        "/opt/rh/devtoolset-7/root/usr/share/gdb/python/gdb/",
+    ],
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingModuleSource": "none",
+    }
+}
